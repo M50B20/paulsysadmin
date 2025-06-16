@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paul – Étudiant en informatique</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 40px;
-      background: #f4f4f4;
-    }
-    h1 {
-      font-size: 2.5rem;
-    }
-    a {
-      text-decoration: none;
-      color: #0077cc;
-    }
-  </style>
+  <title>Paul – Administrateur Systèmes et Réseaux</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <h1>Bienvenue sur paulsysadmin.fr</h1>
-  <p>Je suis Paul, étudiant en BTS CIEL option IR, passionné par l'administration système & réseau.</p>
-  <p>🔧 Des projets bientôt en ligne...</p>
+
+  <div id="header"></div>
+
+  <main>
+    <h2>Bienvenue sur paulsysadmin.fr</h2>
+    <p>Je suis Paul, étudiant passionné par l’administration système & réseau.</p>
+    <p><a href="projects.html">Voir mes projets</a></p>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    fetch("components/header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
+    fetch("components/footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+  </script>
+
 </body>
 </html>
