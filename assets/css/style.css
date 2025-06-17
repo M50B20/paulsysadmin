@@ -1,10 +1,9 @@
-/* style.css du site web */
+/* Reset global */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 body {
   font-family: 'Segoe UI', Roboto, sans-serif;
@@ -22,24 +21,46 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Header principal avec menu */
 .site-header {
   background-color: #103d80;
-  color: #fff;
-  padding: 2rem 1rem;
-  text-align: center;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .site-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
 }
 
 .site-header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 1rem;
+  opacity: 0.8;
 }
 
+/* Menu de navigation */
+.site-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
 
+.site-header nav ul li a {
+  color: white;
+  font-weight: 600;
+}
+
+.site-header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
 .footer {
   background-color: #33363a;
   color: #d4d4d4;
@@ -65,7 +86,6 @@ main h2 {
 main p {
   margin-bottom: 1rem;
 }
-
 
 .project {
   background-color: #fff;
@@ -94,5 +114,23 @@ main p {
 
   main {
     padding: 0 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-header nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .site-header nav ul li a {
+    display: block;
+    padding: 0.5rem 0;
   }
 }
