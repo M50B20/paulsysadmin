@@ -229,3 +229,25 @@ main p {
     padding: 0.5rem 0;
   }
 }
+
+.pdf-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  text-align: left;
+}
+
+.pdf-list li {
+  margin-bottom: 0.8rem;
+}
+
+.pdf-list a {
+  color: #103d80;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pdf-list a:hover {
+  text-decoration: underline;
+}
