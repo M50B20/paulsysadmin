@@ -22,7 +22,7 @@ a:hover {
 }
 
 /* Header principal avec menu */
-.site-header {
+.header {
   background-color: #103d80;
   color: white;
   padding: 1rem 2rem;
@@ -32,18 +32,18 @@ a:hover {
   flex-wrap: wrap;
 }
 
-.site-header h1 {
+.header h1 {
   font-size: 1.8rem;
   margin-bottom: 0.2rem;
 }
 
-.site-header p {
+.header p {
   font-size: 1rem;
   opacity: 0.8;
 }
 
 /* Menu de navigation */
-.site-header nav ul {
+.header nav ul {
   list-style: none;
   display: flex;
   gap: 1.5rem;
@@ -51,12 +51,12 @@ a:hover {
   padding: 0;
 }
 
-.site-header nav ul li a {
+.header nav ul li a {
   color: white;
   font-weight: 600;
 }
 
-.site-header nav ul li a:hover {
+.header nav ul li a:hover {
   text-decoration: underline;
 }
 
