@@ -70,14 +70,14 @@ main p {
   background-color: #fff;
   margin: 20px 0;
   padding: 20px;
-  border-left: 4px solid #0d6efd;
+  border-left: 4px solid #103d80;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: left;
 }
 
 .project h3 {
-  color: #265295;
+  color: #103d80;
   margin-bottom: 10px;
 }
 
