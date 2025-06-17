@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: #007BFF;
+  color: #245993;
   text-decoration: none;
 }
 
@@ -36,7 +36,7 @@ a:hover {
 
 /* Footer Styles */
 .footer {
-  background-color: #343a40;
+  background-color: #245993;
   color: #d4d4d4;
   text-align: center;
   padding: 1rem;
