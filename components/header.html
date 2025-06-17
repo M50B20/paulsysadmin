@@ -1,6 +1,7 @@
 <header class="header">
   <h1>Paul SysAdmin</h1>
   <p>Étudiant en BTS CIEL – Admin Systèmes & Réseaux</p>
+
   <nav>
     <ul>
       <li><a href="index.html">Accueil</a></li>
@@ -8,23 +9,15 @@
       <li><a href="ressources.html">Ressources</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-     <script>
-    const btn = document.getElementById('toggle-theme');
+  </nav>
 
-    // Appliquer au chargement la préférence stockée
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
-
-    btn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-
-      if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-      } else {
-        localStorage.setItem('theme', 'light');
-      }
-    });
-  </script>
-  <button id="toggle-theme">Changer le thème</button>
+  <!-- Interrupteur thème sombre / clair -->
+  <label class="apple-switch">
+    <input type="checkbox" id="dark-mode-toggle">
+    <span class="slider"></span>
+    <span class="switch-icon sun">&#9728;</span>
+    <span class="switch-icon moon">&#9790;</span>
+  </label>
 </header>
+<!-- Chargement du script pour le thème sombre -->
+<script src="assets/js/script.js"></script>

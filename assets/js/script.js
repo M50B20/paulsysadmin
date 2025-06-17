@@ -1,22 +1,23 @@
-// Initialisation du thème sombre
+// Activer le thème sombre au chargement si besoin
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+
+// Fonction appelée après le chargement du header
 function initThemeToggle() {
-  const btn = document.getElementById('toggle-theme');
-  if (!btn) return;
+  const toggle = document.getElementById('dark-mode-toggle');
+  if (!toggle) return;
 
-  // Appliquer la préférence au chargement
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-  }
+  // Cocher la case si le thème est sombre
+  toggle.checked = document.documentElement.classList.contains('dark');
 
-  btn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-
-    if (document.body.classList.contains('dark-mode')) {
-      localStorage.setItem('theme', 'dark');
-    } else {
-      localStorage.setItem('theme', 'light');
-    }
+  // Basculer le thème au clic
+  toggle.addEventListener('change', function () {
+    const isDark = toggle.checked;
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 }
 
+// Rendre accessible depuis header.js
 window.initThemeToggle = initThemeToggle;
