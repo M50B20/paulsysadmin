@@ -5,11 +5,18 @@
   box-sizing: border-box;
 }
 
+/* Thème clair (par défaut) */
 body {
   font-family: 'Segoe UI', Roboto, sans-serif;
   background-color: #f8f9fa;
   color: #212529;
   line-height: 1.6;
+}
+
+/* Thème sombre */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
 a {
