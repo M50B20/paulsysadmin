@@ -1,16 +1,10 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Paul – Étudiant en informatique">
+  <h2>Bienvenue sur paulsysadmin.fr</h2>
+  <p>Je suis Paul, étudiant passionné par l’administration système & réseau.</p>
+  <p>Ce site est un portfolio pour présenter mes compétences et projets.</p>
+  <p>Vous trouverez également des documentations et procédures dans la section <a href="/ressources">ressources</a>.</p>
+  <p><a href="/projets">Voir mes projets</a></p>
+</BaseLayout>

@@ -1,0 +1,39 @@
+<header class="header">
+  <h1><a href="../index.html">Paul SysAdmin</a></h1>
+  <p>Étudiant en BTS CIEL – Admin Systèmes & Réseaux</p>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="ressources.html">Ressources</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Interrupteur thème sombre / clair -->
+  <label class="apple-switch">
+    <input type="checkbox" id="dark-mode-toggle">
+    <span class="slider"></span>
+    <span class="switch-icon sun">&#9728;</span>
+    <span class="switch-icon moon">&#9790;</span>
+  </label>
+   <script>
+    // Activer le thème sombre au chargement si besoin
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+
+    // Initialiser le bouton de toggle
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (toggle) {
+      toggle.checked = document.documentElement.classList.contains('dark');
+
+      toggle.addEventListener('change', () => {
+        const isDark = toggle.checked;
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    }
+  </script>
+</header>
