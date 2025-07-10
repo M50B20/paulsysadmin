@@ -28,7 +28,6 @@ html.dark body {
   color: #f0f0f0;
 }
 
-/* Exemple pour boutons, liens, etc. */
 html.dark a {
   color: #aad4ff;
 }
@@ -112,12 +111,18 @@ html.dark a {
 }
 
 a {
-  color: #ffffff;
+  color: #ff0000;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+a.site-title {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 /* Header principal avec menu */
@@ -250,4 +255,8 @@ main p {
 
 .pdf-list a:hover {
   text-decoration: underline;
+}
+
+#projet {
+  color:red
 }
