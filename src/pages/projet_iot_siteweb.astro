@@ -4,6 +4,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Système de Monitoring IoT Local">
   <h2>Système de Monitoring IoT Local : ESP32, Raspberry Pi et Interface Web Sécurisée</h2>
+  <h3>1. Contexte et objectifs</h3>
   <p>Ce projet consiste en la création d'un système de monitoring IoT local utilisant un ESP32 pour la collecte de données, un Raspberry Pi pour le traitement et l'affichage des données, et une interface web sécurisée pour la visualisation des informations.</p>
   <p>Le système permet de surveiller divers paramètres environnementaux tels que la température, l'humidité, et d'autres données pertinentes, tout en garantissant la sécurité des données via une interface web protégée.</p>
-</BaseLayout>
+  <h3>2. Architecture Matérielle et Logicielle</h3>
+  <p>Le système est organisé autour des éléments suivants :</p>
+  <ul class="liste">
+    <li>Un ESP32 servant de nœud IoT pour capter les données (température et humidité).</li>
+    <li>Une Raspberry Pi connectée en Ethernet à un routeur local, jouant le rôle de serveur.</li>
+    <li>Un serveur LAMP (Linux, Apache, MySQL, PHP) installé sur la Raspberry Pi.</li>
+    <li>Une base de données MySQL gérée via l’interface PhpMyAdmin.</li>
+    <li>Un site web dynamique relié à la BDD qui récupère les données.</li>
+    <li>Un routeur WiFi assurant la liaison réseau locale entre les composants.</li>
+  </ul>
+  <h3>3. Fonctionnement du Site Web</h3>
+  <p>Le site web comporte plusieurs pages permettant à l’utilisateur de :</p>
+  <ul class="liste">
+    <li>Accéder à une page d’accueil présentant le projet.</li>
+    <li>Se connecter via un formulaire sécurisé (email + mot de passe).</li>
+    <li>Accéder à un tableau de bord avec les mesures du capteur.</li>
+  </ul>
+  <p>Deux versions du site sont proposées :</p>
+  <ul class="liste">
+    <li>Une version de développement autonome avec données insérées manuellement dans la base de données (sans liaison à l’ESP32).</li>
+    <li>Une version connectée à l’ESP32 qui envoie des données en temps réel via HTTP POST vers un script PHP (insert.php).</li>
+  </ul>
+  </BaseLayout>

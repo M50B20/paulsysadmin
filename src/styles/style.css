@@ -125,6 +125,21 @@ a.site-title {
   text-decoration: none;
 }
 
+/* Centrer la liste sur la page */
+ul.liste {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* garder les puces à gauche du texte */
+  justify-content: center;
+  margin: 2rem auto; /* centrage horizontal avec marge */
+  width: fit-content; /* rétrécit la liste à son contenu */
+}
+
+/* Espacement entre les éléments de la liste */
+ul.liste li {
+  margin-bottom: 0.5rem;
+}
+
 /* Header principal avec menu */
 .header {
   background-color: #103d80;
