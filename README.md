@@ -1,5 +1,4 @@
 # paulsysadmin
-Portfolio personnel en construction
 # Licence et mentions légales
 
 ## Code source
