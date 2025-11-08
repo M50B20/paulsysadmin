@@ -1,33 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+<BaseLayout title="Projet: Monitoring IoT">
 
-<BaseLayout title="Système de Monitoring IoT Local">
-  <h2>Système de Monitoring IoT Local : ESP32, Raspberry Pi et Interface Web Sécurisée</h2>
-  <h3>1. Contexte et objectifs</h3>
-  <p>Ce projet consiste en la création d'un système de monitoring IoT local utilisant un ESP32 pour la collecte de données, un Raspberry Pi pour le traitement et l'affichage des données, et une interface web sécurisée pour la visualisation des informations.</p>
-  <p>Le système permet de surveiller divers paramètres environnementaux tels que la température, l'humidité, et d'autres données pertinentes, tout en garantissant la sécurité des données via une interface web protégée.</p>
-  <h3>2. Architecture Matérielle et Logicielle</h3>
-  <p>Le système est organisé autour des éléments suivants :</p>
-  <ul class="liste">
-    <li>Un ESP32 servant de nœud IoT pour capter les données (température et humidité).</li>
-    <li>Une Raspberry Pi connectée en Ethernet à un routeur local, jouant le rôle de serveur.</li>
-    <li>Un serveur LAMP (Linux, Apache, MySQL, PHP) installé sur la Raspberry Pi.</li>
-    <li>Une base de données MySQL gérée via l’interface PhpMyAdmin.</li>
-    <li>Un site web dynamique relié à la BDD qui récupère les données.</li>
-    <li>Un routeur WiFi assurant la liaison réseau locale entre les composants.</li>
-  </ul>
-  <h3>3. Fonctionnement du Site Web</h3>
-  <p>Le site web comporte plusieurs pages permettant à l’utilisateur de :</p>
-  <ul class="liste">
-    <li>Accéder à une page d’accueil présentant le projet.</li>
-    <li>Se connecter via un formulaire sécurisé (email + mot de passe).</li>
-    <li>Accéder à un tableau de bord avec les mesures du capteur.</li>
-  </ul>
-  <p>Deux versions du site sont proposées :</p>
-  <ul class="liste">
-    <li>Une version de développement autonome avec données insérées manuellement dans la base de données.</li>
-    <li>Une version connectée à l’ESP32 qui envoie des données en temps réel via HTTP POST vers un script PHP.</li>
-  </ul>
-  
-  </BaseLayout>
+  <article class="max-w-3xl mx-auto">
+    
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Système de Monitoring IoT Local
+      </h1>
+      <div class="flex flex-wrap justify-center gap-2">
+        <span class="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full">ESP32</span>
+        <span class="px-3 py-1 text-sm bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 rounded-full">Raspberry Pi</span>
+        <span class="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 rounded-full">PHP</span>
+        <span class="px-3 py-1 text-sm bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100 rounded-full">MySQL</span>
+      </div>
+    </div>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">1. Contexte et Objectifs</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        Ce projet consiste en la création d'un système de monitoring IoT local. L'objectif est de capter des données environnementales (température, humidité) via un microcontrôleur, de les stocker sur un serveur local et de les afficher sur une interface web sécurisée.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">2. Architecture Matérielle et Logicielle</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">Le système est organisé autour des éléments suivants :</p>
+      <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 text-lg">
+        <li><strong>Nœud IoT :</strong> Un <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">ESP32</code> pour capter les données des capteurs.</li>
+        <li><strong>Serveur Local :</strong> Une <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Raspberry Pi</code> connectée au réseau local.</li>
+        <li><strong>Stack Serveur :</strong> Un serveur <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">LAMP</code> (Linux, Apache, MySQL, PHP) installé sur la Raspberry Pi.</li>
+        <li><strong>Base de Données :</strong> <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">MySQL</code> pour stocker les mesures.</li>
+        <li><strong>Réseau :</strong> Un routeur WiFi assurant la liaison entre l'ESP32 et la Raspberry Pi.</li>
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">3. Fonctionnement de l'Interface Web</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+        L'ESP32 envoie les données en temps réel via des requêtes <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">HTTP POST</code> à un script PHP hébergé sur la Raspberry Pi. Ce script les insère ensuite dans la base de données MySQL.
+      </p>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+        Le site web dynamique permet à l'utilisateur de :
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 text-lg">
+        <li>Se connecter via un formulaire sécurisé (email + mot de passe).</li>
+        <li>Accéder à un tableau de bord affichant les mesures des capteurs (récupérées depuis la BDD).</li>
+      </ul>
+    </section>
+    
+  </article>
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Projet: Homelab VMware">
+
+  <article class="max-w-3xl mx-auto">
+    
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Laboratoire de Virtualisation (Homelab)</h1>
+      <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm font-medium px-4 py-1 rounded-full">Projet en cours</span>
+    </div>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">1. Objectif</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        L'objectif de ce projet est de construire un laboratoire de virtualisation ("homelab") sur mon poste de travail à l'aide de VMware Workstation Pro. Ce lab simule une petite infrastructure d'entreprise, me permettant de tester des configurations réseau avancées et de déployer des services serveurs critiques.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">2. Architecture et Composants</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">L'infrastructure repose sur les machines virtuelles suivantes :</p>
+      <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 text-lg">
+        <li><strong>Hyperviseur :</strong> VMware Workstation Pro</li>
+        <li><strong>Routeur / Pare-feu :</strong> 1x VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">pfSense</code></li>
+        <li><strong>Serveur Principal :</strong> 1x VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Windows Server 2022</code></li>
+        <li><strong>Clients (à venir) :</strong> VM Windows 11, VM Ubuntu Desktop</li>
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">3. Étapes Réalisées</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">À ce jour, les étapes suivantes ont été complétées :</p>
+      <ul class="list-decimal list-inside space-y-3 text-lg text-gray-600 dark:text-gray-300">
+        <li>
+          <strong>Configuration de pfSense :</strong>
+          <ul class="list-disc list-inside ml-6 mt-2">
+            <li>Mise en place des interfaces WAN (connectée au réseau local) et LAN (réseau isolé pour les VMs).</li>
+            <li>Configuration du serveur DHCP sur le LAN pour distribuer les adresses.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Déploiement du Contrôleur de Domaine (Windows Server) :</strong>
+          <ul class="list-disc list-inside ml-6 mt-2">
+            <li>Installation de Windows Server 2022.</li>
+            <li>Configuration d'une adresse IP fixe.</li>
+            <li>Installation et configuration des rôles :</li>
+            <li class="ml-4"><strong>Active Directory (AD DS) :</strong> Création d'une nouvelle forêt et d'un domaine.</li>
+            <li class="ml-4"><strong>DNS :</strong> Lié à l'Active Directory.</li>
+            <li class="ml-4"><strong>DHCP :</strong> Désactivé sur ce serveur (géré par pfSense pour le moment).</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">4. Prochaines Étapes</h2>
+      <ul class="list-disc list-inside space-y-2 text-lg text-gray-600 dark:text-gray-300">
+        <li>Intégrer une VM cliente (Windows 11) au domaine.</li>
+        <li>Tester la création d'utilisateurs et l'application de GPO (Group Policy Objects).</li>
+        <li>Mettre en place un serveur de fichiers (partage SMB).</li>
+        <li>Créer des VLANs pour segmenter le réseau (ex: clients, serveurs).</li>
+      </ul>
+    </section>
+
+  </article>
+</BaseLayout>
