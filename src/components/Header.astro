@@ -1,37 +1,89 @@
-<header class="header">
-  <h1><a href="/" class="site-title">Paul SysAdmin</a></h1>
-  <p>Étudiant en BTS CIEL – Admin Systèmes & Réseaux</p>
+---
+// Logique pour surligner la page active
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname; // Gère le "/" final
+---
+<header class="bg-primary dark:bg-primary-dark shadow-lg transition-colors duration-300 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center space-x-3">
+          <h1 class="text-2xl font-bold text-white hover:text-gray-200 transition">Paul SysAdmin</h1>
+        </a>
+        <p class="text-gray-300 text-sm mt-1">Étudiant en BTS CIEL – Admin Systèmes & Réseaux</p>
+      </div>
 
-  <nav>
-    <ul>
-      <li><a href="/">Accueil</a></li>
-      <li><a href="/projets">Projets</a></li>
-      <li><a href="/ressources">Ressources</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+      <div class="hidden md:flex md:items-center md:space-x-6">
+        <nav>
+          <ul class="flex space-x-6">
+            <li><a href="/" class:list={["text-gray-300 hover:text-white transition", { "text-white font-semibold border-b-2 border-blue-400": currentPath === "" }]}>Accueil</a></li>
+            <li><a href="/projets" class:list={["text-gray-300 hover:text-white transition", { "text-white font-semibold border-b-2 border-blue-400": currentPath === "/projets" }]}>Projets</a></li>
+            <li><a href="/ressources" class:list={["text-gray-300 hover:text-white transition", { "text-white font-semibold border-b-2 border-blue-400": currentPath === "/ressources" }]}>Ressources</a></li>
+            <li><a href="/contact" class:list={["text-gray-300 hover:text-white transition", { "text-white font-semibold border-b-2 border-blue-400": currentPath === "/contact" }]}>Contact</a></li>
+          </ul>
+        </nav>
+        
+        <button id="theme-toggle-btn" class="rounded-lg p-2.5 text-gray-300 hover:text-white focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700" aria-label="Changer le thème">
+          <span class="dark:hidden"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span>
+          <span class="hidden dark:inline"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg></span>
+        </button>
+      </div>
 
-  <!-- Interrupteur thème sombre / clair -->
-  <label class="apple-switch">
-    <input type="checkbox" id="dark-mode-toggle">
-    <span class="slider"></span>
-    <span class="switch-icon sun">&#9728;</span>
-    <span class="switch-icon moon">&#9790;</span>
-  </label>
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Ouvrir le menu</span>
+          <svg id="menu-icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          <svg id="menu-icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-
-    const toggle = document.getElementById('dark-mode-toggle');
-    if (toggle && toggle instanceof HTMLInputElement) {
-      toggle.checked = document.documentElement.classList.contains('dark');
-      toggle.addEventListener('change', () => {
-        const isDark = toggle.checked;
-        document.documentElement.classList.toggle('dark', isDark);
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      });
-    }
-  </script>
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="pt-4 pb-3 space-y-1 px-2">
+      <a href="/" class:list={["block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-primary-dark", { "text-white bg-primary-dark": currentPath === "" }]}>Accueil</a>
+      <a href="/projets" class:list={["block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-primary-dark", { "text-white bg-primary-dark": currentPath === "/projets" }]}>Projets</a>
+      <a href="/ressources" class:list={["block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-primary-dark", { "text-white bg-primary-dark": currentPath === "/ressources" }]}>Ressources</a>
+      <a href="/contact" class:list={["block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-primary-dark", { "text-white bg-primary-dark": currentPath === "/contact" }]}>Contact</a>
+      
+      <div class="pt-2">
+        <button id="theme-toggle-btn-mobile" class="w-full flex items-center justify-center rounded-lg p-2.5 text-gray-300 hover:text-white hover:bg-primary-dark" aria-label="Changer le thème">
+          <span class="dark:hidden"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg> Nuit</span>
+          <span class="hidden dark:inline"><svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg> Jour</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </header>
+
+<script>
+  const toggleTheme = () => {
+    const html = document.documentElement;
+    html.classList.toggle("dark");
+    const isDark = html.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
+
+  document.getElementById("theme-toggle-btn")?.addEventListener("click", toggleTheme);
+  document.getElementById("theme-toggle-btn-mobile")?.addEventListener("click", toggleTheme);
+
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("menu-icon-open");
+  const iconClose = document.getElementById("menu-icon-close");
+
+  mobileMenuBtn?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+    iconOpen?.classList.toggle("hidden");
+    iconClose?.classList.toggle("hidden");
+    const isExpanded = mobileMenu?.classList.contains("hidden") ? "false" : "true";
+    mobileMenuBtn.setAttribute("aria-expanded", isExpanded);
+  });
+</script>
+
+<style>
+  .bg-primary { background-color: var(--theme-header-bg); }
+  .dark .bg-primary-dark { background-color: var(--theme-header-bg); }
+  .hover\:bg-primary-dark:hover { background-color: #1f2937; } /* Un peu plus clair au survol */
+</style>

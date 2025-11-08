@@ -1,10 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Paul – Étudiant en informatique">
-  <h2>Bienvenue sur paulsysadmin.fr</h2>
-  <p>Je suis Paul, étudiant passionné par l’administration système & réseau.</p>
-  <p>Ce site est un portfolio pour présenter mes compétences et projets.</p>
-  <p>Vous trouverez également des documentations et procédures dans la section <a href="/ressources">ressources</a>.</p>
-  <p><a href="/projets">Voir mes projets</a></p>
+<BaseLayout title="Accueil">
+
+  <div class="text-center mb-16">
+    <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+      Paul, Spécialiste en <span class="text-primary dark:text-blue-400">Cybersécurité</span> & <span class="text-primary dark:text-blue-400">Admin. Réseau</span>
+    </h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+      Étudiant en 2ème année de BTS CIEL, passionné par l'infrastructure et le code. 
+      Je recherche activement une alternance pour mettre en pratique mes compétences.
+    </p>
+    <div class="mt-10 space-x-4">
+      <a href="/projets" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark transition-colors">
+        Découvrir mes projets
+      </a>
+      <a href="/contact" class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-700 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        Me contacter
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Mes Compétences Clés</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+        <svg class="w-12 h-12 text-primary dark:text-blue-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        <h3 class="text-xl font-semibold mb-2">Systèmes & Réseaux</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Administration Linux (Ubuntu, Debian) et Windows Server. Configuration et dépannage réseau.</p>
+        <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm font-medium px-3 py-1 rounded-full">Cisco NetAcad</span>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+        <svg class="w-12 h-12 text-primary dark:text-blue-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+        <h3 class="text-xl font-semibold mb-2">Programmation & Scripting</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Développement en C++ pour les systèmes embarqués et Python pour l'automatisation et l'analyse.</p>
+        <span class="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 text-sm font-medium px-3 py-1 rounded-full mr-2">C++</span>
+        <span class="inline-block bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100 text-sm font-medium px-3 py-1 rounded-full">Python (PCEP)</span>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+        <svg class="w-12 h-12 text-primary dark:text-blue-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        <h3 class="text-xl font-semibold mb-2">Cybersécurité</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Principes de sécurisation des systèmes et des réseaux, analyse de logs, et mise en place de pare-feu.</p>
+        <span class="inline-block bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100 text-sm font-medium px-3 py-1 rounded-full">BTS CIEL Opt. A</span>
+      </div>
+
+    </div>
+  </div>
+
 </BaseLayout>
+
+<style>
+  .text-primary { color: var(--theme-primary); }
+  .dark .text-blue-400 { color: var(--theme-primary); }
+  .bg-primary { background-color: var(--theme-primary); }
+  .hover\:bg-primary-dark:hover { background-color: #083a75; } /* Bleu plus sombre au survol */
+</style>

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Configuration de base pour le thème */
+:root {
+  --theme-bg: #ffffff;
+  --theme-text: #1f2937;
+  --theme-primary: #0a4d98; /* Un bleu plus "tech" */
+  --theme-header-bg: #111827; /* Header sombre */
+  --theme-header-text: #f9fafb;
+}
+
+html.dark {
+  --theme-bg: #0f172a; /* Fond sombre */
+  --theme-text: #e5e7eb;
+  --theme-primary: #38bdf8; /* Bleu clair pour le mode sombre */
+  --theme-header-bg: #0f172a;
+  --theme-header-text: #f9fafb;
+}
+
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  transition: background-color 0.3s, color 0.3s;
+}
