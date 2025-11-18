@@ -6,60 +6,91 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <article class="max-w-3xl mx-auto">
     
     <div class="text-center mb-10">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Laboratoire de Virtualisation (Homelab)</h1>
-      <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm font-medium px-4 py-1 rounded-full">Projet en cours</span>
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Laboratoire de Virtualisation (Homelab)
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300">
+        De l'Active Directory local à une infrastructure hybride et segmentée.
+      </p>
     </div>
 
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">1. Objectif</h2>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">1. Objectif et Fondations</h2>
       <p class="text-lg text-gray-600 dark:text-gray-300">
-        L'objectif de ce projet est de construire un laboratoire de virtualisation ("homelab") sur mon poste de travail à l'aide de VMware Workstation Pro. Ce lab simule une petite infrastructure d'entreprise, me permettant de tester des configurations réseau avancées et de déployer des services serveurs critiques.
+        Partant d'une installation VMware Workstation Pro sur mon poste (HP Victus, 40Go RAM), l'objectif était de transformer une simple collection de VM en un véritable laboratoire de cybersécurité, simulant une infrastructure d'entreprise moderne.
       </p>
     </section>
 
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">2. Architecture et Composants</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">L'infrastructure repose sur les machines virtuelles suivantes :</p>
-      <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 text-lg">
-        <li><strong>Hyperviseur :</strong> VMware Workstation Pro</li>
-        <li><strong>Routeur / Pare-feu :</strong> 1x VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">pfSense</code></li>
-        <li><strong>Serveur Principal :</strong> 1x VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Windows Server 2022</code></li>
-        <li><strong>Clients (à venir) :</strong> VM Windows 11, VM Ubuntu Desktop</li>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">2. Phase 1 : Infrastructure Active Directory</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+        La première étape a été de construire le "cœur" d'une entreprise :
+      </p>
+      <ul class="list-disc list-inside space-y-3 text-lg text-gray-600 dark:text-gray-300">
+        <li>
+          <strong>Contrôleur de Domaine :</strong> Installation de <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Windows Server</code> et promotion en DC pour le domaine <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">victus.internal</code>.
+        </li>
+        <li>
+          <strong>Services Essentiels :</strong> Configuration d'AD DS, DNS et DHCP.
+        </li>
+        <li>
+          <strong>Gestion des Accès :</strong> Création d'Unités d'Organisation (UO), d'utilisateurs et de groupes (GRP_Compta, GRP_R&D).
+        </li>
+         <li>
+          <strong>Serveur de Fichiers :</strong> Mise en place de partages SMB avec permissions NTFS granulaires, en respectant le principe de moindre privilège.
+        </li>
+        <li>
+          <strong>Automatisation (GPO) :</strong> Déploiement de Stratégies de Groupe pour mapper les lecteurs réseau (P:) et afficher un avertissement légal au démarrage.
+        </li>
+        <li>
+          <strong>Client :</strong> Intégration d'une VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Windows 11</code> au domaine pour valider les GPO et les permissions.
+        </li>
       </ul>
     </section>
 
     <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">3. Étapes Réalisées</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">À ce jour, les étapes suivantes ont été complétées :</p>
-      <ul class="list-decimal list-inside space-y-3 text-lg text-gray-600 dark:text-gray-300">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">3. Phase 2 : Connexion Hybride (Azure Arc)</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        Pour explorer les environnements hybrides, j'ai connecté mon laboratoire local au cloud public. En utilisant un compte Azure, j'ai intégré mon Contrôleur de Domaine à <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Azure Arc</code>, le transformant en un serveur hybride visible et gérable depuis le portail Azure.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">4. Phase 3 : Intégration Linux (Debian & Samba)</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+        Le défi suivant était d'intégrer un serveur de fichiers <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Debian 12</code> dans le domaine Active Directory.
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-lg text-gray-600 dark:text-gray-300">
         <li>
-          <strong>Configuration de pfSense :</strong>
-          <ul class="list-disc list-inside ml-6 mt-2">
-            <li>Mise en place des interfaces WAN (connectée au réseau local) et LAN (réseau isolé pour les VMs).</li>
-            <li>Configuration du serveur DHCP sur le LAN pour distribuer les adresses.</li>
-          </ul>
+          <strong>Défi :</strong> Résolution d'un conflit complexe entre les services d'identité <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">SSSD</code> et <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Winbind</code> pour l'authentification.
         </li>
         <li>
-          <strong>Déploiement du Contrôleur de Domaine (Windows Server) :</strong>
-          <ul class="list-disc list-inside ml-6 mt-2">
-            <li>Installation de Windows Server 2025.</li>
-            <li>Configuration d'une adresse IP fixe.</li>
-            <li>Installation et configuration des rôles :</li>
-            <li class="ml-4"><strong>Active Directory (AD DS) :</strong> Création d'une nouvelle forêt et d'un domaine.</li>
-            <li class="ml-4"><strong>DNS :</strong> Lié à l'Active Directory.</li>
-            <li class="ml-4"><strong>DHCP :</strong> Désactivé sur ce serveur (géré par pfSense pour le moment).</li>
-          </ul>
+          <strong>Solution :</strong> Configuration d'une solution hybride où SSSD gère l'identité système (permettant `chown`) et Winbind assiste Samba pour l'authentification.
+        </li>
+        <li>
+          <strong>Authentification :</strong> Configuration de <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Samba (smb.conf)</code> pour utiliser SSSD comme backend et <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Kerberos (keytab)</code> pour une authentification sécurisée auprès de l'AD.
         </li>
       </ul>
     </section>
     
     <section>
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">4. Prochaines Étapes</h2>
-      <ul class="list-disc list-inside space-y-2 text-lg text-gray-600 dark:text-gray-300">
-        <li>Intégrer une VM cliente (Windows 11) au domaine.</li>
-        <li>Tester la création d'utilisateurs et l'application de GPO (Group Policy Objects).</li>
-        <li>Mettre en place un serveur de fichiers (partage SMB).</li>
-        <li>Créer des VLANs pour segmenter le réseau (ex: clients, serveurs).</li>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">5. Phase 4 : Architecture Réseau Segmentée (Zero Trust)</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+        L'architecture réseau plate initiale n'était pas sécurisée. Je l'ai entièrement reconstruite en suivant un modèle de segmentation :
+      </p>
+      <ul class="list-disc list-inside space-y-3 text-lg text-gray-600 dark:text-gray-300">
+        <li>
+          <strong>Zonage :</strong> Création de 3 réseaux virtuels (VMnets) isolés : <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">SERVERS</code>, <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">CLIENTS</code>, et <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">DMZ</code>.
+        </li>
+        <li>
+          <strong>Routage Centralisé :</strong> Reconfiguration de <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">pfSense</code> avec 4 interfaces pour agir en tant que routeur et pare-feu inter-zones.
+        </li>
+        <li>
+          <strong>Migration :</strong> Migration du DC (changement d'IP) vers la zone SERVERS et déplacement du service DHCP de Windows vers pfSense pour la zone CLIENTS.
+        </li>
+         <li>
+          <strong>Documentation :</strong> L'ensemble de cette nouvelle architecture est documenté dans un schéma <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Packet Tracer</code>.
+        </li>
       </ul>
     </section>
 
