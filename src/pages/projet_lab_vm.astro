@@ -1,66 +1,131 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Projet: Homelab VMware">
+<BaseLayout title="Projet: Homelab Victus Enterprise">
 
-  <article class="max-w-3xl mx-auto">
+  <article class="max-w-4xl mx-auto">
     
-    <div class="text-center mb-10">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Laboratoire de Virtualisation (Homelab)</h1>
-      <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm font-medium px-4 py-1 rounded-full">Projet en cours</span>
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Home-Lab de simulation d'un réseau d'entreprise</h1>
+      <div class="flex justify-center gap-2">
+        <span class="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 text-sm font-medium px-4 py-1 rounded-full">Production</span>
+        <span class="inline-block bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 text-sm font-medium px-4 py-1 rounded-full">Hybride KVM/Proxmox</span>
+      </div>
     </div>
 
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">1. Objectif</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300">
-        L'objectif de ce projet est de construire un laboratoire de virtualisation ("homelab") sur mon poste de travail à l'aide de VMware Workstation Pro. Ce lab simule une petite infrastructure d'entreprise, me permettant de tester des configurations réseau avancées et de déployer des services serveurs critiques.
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">1. Contexte & Philosophie</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Matériel Hôte (HP Victus)</h3>
+          <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
+            <li><strong>CPU :</strong> Ryzen 5 5600H</li>
+            <li><strong>RAM :</strong> 40 Go DDR4</li>
+            <li><strong>Stockage :</strong> NVMe 2 To</li>
+            <li><strong>OS Hôte :</strong> Fedora 43 KDE (Poste de travail & Hyperviseur KVM)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">Principes Directeurs</h3>
+          <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
+            <li>Security by Design (Zero Trust)</li>
+            <li>Deny by Default (Pare-feu strict)</li>
+            <li>Micro-segmentation réseau</li>
+            <li>Migration VMware vers KVM (Open Source)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">2. Architecture Réseau (Zero Trust)</h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        L'infrastructure repose sur une segmentation stricte via <strong>pfSense</strong> (virtualisé sur KVM avec interfaces VirtIO).
       </p>
+      
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="w-full text-left text-sm text-gray-600 dark:text-gray-300">
+          <thead class="bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white uppercase font-medium">
+            <tr>
+              <th class="px-4 py-3">Zone</th>
+              <th class="px-4 py-3">Sous-réseau</th>
+              <th class="px-4 py-3">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="px-4 py-2 font-mono text-blue-600 dark:text-blue-400">SERVERS</td>
+              <td class="px-4 py-2 font-mono">192.168.110.0/24</td>
+              <td class="px-4 py-2">DC, PKI, SIEM</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="px-4 py-2 font-mono text-blue-600 dark:text-blue-400">CLIENTS</td>
+              <td class="px-4 py-2 font-mono">192.168.120.0/24</td>
+              <td class="px-4 py-2">Postes Windows 10/11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="px-4 py-2 font-mono text-orange-600 dark:text-orange-400">DMZ_PROXY</td>
+              <td class="px-4 py-2 font-mono">192.168.130.0/24</td>
+              <td class="px-4 py-2">Nginx Proxy Manager (Front)</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="px-4 py-2 font-mono text-orange-600 dark:text-orange-400">DMZ_WEB</td>
+              <td class="px-4 py-2 font-mono">192.168.140.0/24</td>
+              <td class="px-4 py-2">Services Backend (Portainer Agents, App Web)</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="px-4 py-2 font-mono text-green-600 dark:text-green-400">VPN</td>
+              <td class="px-4 py-2 font-mono">10.10.10.0/24</td>
+              <td class="px-4 py-2">WireGuard (Accès distant admin)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">2. Architecture et Composants</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">L'infrastructure repose sur les machines virtuelles suivantes :</p>
-      <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 text-lg">
-        <li><strong>Hyperviseur :</strong> VMware Workstation Pro</li>
-        <li><strong>Routeur / Pare-feu :</strong> 1x VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">pfSense</code></li>
-        <li><strong>Serveur Principal :</strong> 1x VM <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">Windows Server 2022</code></li>
-        <li><strong>Clients (à venir) :</strong> VM Windows 11, VM Ubuntu Desktop</li>
-      </ul>
-    </section>
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">3. Implémentation Technique</h2>
+      
+      <div class="space-y-6">
+        <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Phase 1 : Identité & Sécurité (Microsoft)</h3>
+          <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+            <li><strong>Active Directory :</strong> Contrôleur de domaine (Windows Server 2025) gérant le domaine <code>victus.internal</code>.</li>
+            <li><strong>PKI (AD CS) :</strong> Autorité de certification racine d'entreprise. Délivrance de certificats Wildcard pour le HTTPS interne.</li>
+            <li><strong>LAPS :</strong> Gestion centralisée des mots de passe administrateur locaux (rotation 30 jours).</li>
+            <li><strong>Conversion SSL :</strong> Scripting OpenSSL pour adapter les certificats `.pfx` Windows vers Nginx (Linux).</li>
+          </ul>
+        </div>
 
-    <section class="mb-8">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">3. Étapes Réalisées</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">À ce jour, les étapes suivantes ont été complétées :</p>
-      <ul class="list-decimal list-inside space-y-3 text-lg text-gray-600 dark:text-gray-300">
-        <li>
-          <strong>Configuration de pfSense :</strong>
-          <ul class="list-disc list-inside ml-6 mt-2">
-            <li>Mise en place des interfaces WAN (connectée au réseau local) et LAN (réseau isolé pour les VMs).</li>
-            <li>Configuration du serveur DHCP sur le LAN pour distribuer les adresses.</li>
+        <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Phase 2 : Défense Active & Web</h3>
+          <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+            <li><strong>Reverse Proxy :</strong> Debian 13 + Nginx Proxy Manager pour la terminaison SSL.</li>
+            <li><strong>CrowdSec :</strong> IPS collaboratif. Analyse des logs Docker et bannissement via `iptables` (Firewall Bouncer).</li>
+            <li><strong>Orchestration :</strong> Portainer pour la gestion des conteneurs (Architecture Maître/Agent).</li>
           </ul>
-        </li>
-        <li>
-          <strong>Déploiement du Contrôleur de Domaine (Windows Server) :</strong>
-          <ul class="list-disc list-inside ml-6 mt-2">
-            <li>Installation de Windows Server 2025.</li>
-            <li>Configuration d'une adresse IP fixe.</li>
-            <li>Installation et configuration des rôles :</li>
-            <li class="ml-4"><strong>Active Directory (AD DS) :</strong> Création d'une nouvelle forêt et d'un domaine.</li>
-            <li class="ml-4"><strong>DNS :</strong> Lié à l'Active Directory.</li>
-            <li class="ml-4"><strong>DHCP :</strong> Désactivé sur ce serveur (géré par pfSense pour le moment).</li>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg border-l-4 border-blue-500">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Migration Infrastructure (VMware ➝ KVM)</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-3">
+            Passage d'une solution propriétaire à une stack open-source native Linux.
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+            <li><strong>Conversion V2V :</strong> Utilisation de <code>qemu-img</code> pour transformer les disques <code>.vmdk</code> en <code>.qcow2</code>.</li>
+            <li><strong>Optimisation VirtIO :</strong> Remplacement des contrôleurs disques (SCSI) et cartes réseaux pour des performances quasi-natives ("Paravirtualization").</li>
+            <li><strong>Poste de travail :</strong> Fedora 43 optimisé (ZSH, Powerlevel10k) servant d'hyperviseur Type 2 avancé.</li>
           </ul>
-        </li>
-      </ul>
+        </div>
+      </div>
     </section>
     
     <section>
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">4. Prochaines Étapes</h2>
-      <ul class="list-disc list-inside space-y-2 text-lg text-gray-600 dark:text-gray-300">
-        <li>Intégrer une VM cliente (Windows 11) au domaine.</li>
-        <li>Tester la création d'utilisateurs et l'application de GPO (Group Policy Objects).</li>
-        <li>Mettre en place un serveur de fichiers (partage SMB).</li>
-        <li>Créer des VLANs pour segmenter le réseau (ex: clients, serveurs).</li>
-      </ul>
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">4. Infrastructure Secondaire (Proxmox)</h2>
+      <p class="text-gray-600 dark:text-gray-300">
+        Un nœud secondaire sous <strong>Proxmox VE</strong> héberge les services de production domestique 24/7 (LXC) : 
+        <span class="italic">Pi-hole, Uptime Kuma, Bookstack (Documentation), Stirling PDF.</span>
+      </p>
     </section>
 
   </article>
