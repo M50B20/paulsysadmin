@@ -1,0 +1,88 @@
+---
+const stats = [
+  { value: '2024–26', label: 'BTS CIEL' },
+  { value: '3',       label: 'serveurs en lab' },
+  { value: '18+',     label: 'certifications' },
+  { value: 'MICSI',   label: 'Mastère CESI visé' },
+];
+---
+
+<section id="about" class="py-28">
+  <div class="section-container">
+
+    <div class="reveal mb-14">
+      <p class="section-label">// qui suis-je</p>
+      <h2 class="section-title">À propos</h2>
+      <div class="w-16 h-0.5 bg-gradient-to-r from-violet-500 to-transparent"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-14 items-start">
+
+      <!-- Avatar + badges -->
+      <div class="lg:col-span-2 reveal reveal-delay-1 flex flex-col items-center lg:items-start gap-7">
+        <div class="w-44 h-44 rounded-2xl bg-gradient-to-br from-violet-600/20 to-indigo-600/20 border border-violet-500/20 flex items-center justify-center shadow-glow-violet">
+          <span class="font-mono text-5xl font-black gradient-text">PP</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+          {['Curieux', 'Autodidacte', 'Orienté pratique'].map(trait => (
+            <span class="chip text-sm">{trait}</span>
+          ))}
+        </div>
+
+        <div class="flex items-center gap-2 text-base text-slate-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-violet-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+          </svg>
+          Ariège, France
+        </div>
+      </div>
+
+      <!-- Bio + stats -->
+      <div class="lg:col-span-3 reveal reveal-delay-2 flex flex-col gap-9">
+
+        <div class="space-y-5 text-slate-300 text-lg leading-relaxed">
+          <p>
+            Titulaire du <span class="text-violet-300 font-medium">BTS CIEL option A</span>
+            (Lycée de Mirepoix, 2024–2026), je me spécialise dans l'infrastructure,
+            les réseaux et la cybersécurité. Objectif à terme :
+            <span class="text-violet-300 font-medium">Infrastructure / Cybersecurity Manager</span>.
+          </p>
+          <p>
+            Cet été, je suis en CDD chez <span class="text-slate-200 font-medium">Alsatis Services</span>
+            (Verniolle) comme technicien support N1/N2 avant de démarrer le
+            <span class="text-violet-300 font-medium">Bachelor ASR</span> puis le
+            <span class="text-violet-300 font-medium">Mastère MICSI</span> au CESI, en alternance.
+          </p>
+          <p>
+            J'entretiens un <span class="text-slate-200 font-medium">home-lab actif</span>
+            (Dell R610 + Asus F540LJ sous Proxmox) où je déploie et teste en conditions réelles :
+            SIEM Wazuh, Active Directory, PKI, Zero Trust.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {stats.map(stat => (
+            <div class="glow-card rounded-xl p-5 bg-bg-card text-center">
+              <div class="text-2xl font-black gradient-text-violet">{stat.value}</div>
+              <div class="text-sm text-slate-400 mt-1 leading-tight">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Current status -->
+        <div class="flex items-start gap-3 p-5 rounded-xl bg-violet-500/8 border border-violet-500/20">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-violet-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+          <p class="text-base text-slate-300">
+            <span class="text-violet-300 font-semibold">En ce moment :</span> CDD technicien support N1/N2 chez Alsatis Services (juillet–septembre 2026),
+            puis démarrage du Bachelor ASR au CESI en alternance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
